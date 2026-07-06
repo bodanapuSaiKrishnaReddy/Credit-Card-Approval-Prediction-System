@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if prediction == 0 %}
+        CreditPrecision - Application Approved
+    {% else %}
+        CreditPrecision - Application Not Approved
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-[1440px] mx-auto px-container-padding-mobile md:px-container-padding-desktop py-stack-lg md:py-[64px] flex justify-center items-start">
+    <!-- Result Panel -->
+    <div class="w-full max-w-3xl bg-surface-container-lowest border border-outline-variant rounded-lg p-stack-lg md:p-[32px] shadow-sm my-8">
+        
+        <!-- Header Section -->
+        <div class="border-b border-outline-variant pb-stack-md mb-stack-md">
+            {% if prediction == 0 %}
+            <div class="flex items-center gap-stack-sm mb-stack-sm">
+                <span class="material-symbols-outlined text-[#2e7d32] text-[32px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-[#2e7d32] m-0">Application Approved</h1>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant m-0">
+                This result is a model-based estimate based on historical data and does not constitute a final lending decision or a binding offer of credit.
+            </p>
+            {% else %}
+            <div class="flex items-center gap-stack-sm mb-stack-sm">
+                <span class="material-symbols-outlined text-error text-[32px]" style="font-variation-settings: 'FILL' 1;">error</span>
+                <h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-error m-0">Application Not Approved</h1>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant m-0">
+                This result is a model-based estimate based on historical data and does not constitute a final lending decision or a binding offer of credit.
+            </p>
+            {% endif %}
+        </div>
+
+        <!-- Summary Section -->
+        <div class="mb-stack-lg">
+            <h2 class="font-headline-sm text-headline-sm text-on-surface mb-stack-sm">Summary of information used</h2>
+            <div class="bg-surface-bright border border-outline-variant rounded p-stack-sm grid grid-cols-1 md:grid-cols-2 gap-y-stack-sm gap-x-stack-lg">
+                <!-- Data Point -->
+                <div class="flex flex-col py-2 border-b border-outline-variant md:border-b-0 md:border-r last:border-0 last:md:border-0 pr-stack-sm">
+                    <span class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Annual Income</span>
+                    <span class="font-mono-data text-mono-data text-on-surface">₹{{ "{:,.2f}".format(data.income) }}</span>
+                </div>
+                <!-- Data Point -->
+                <div class="flex flex-col py-2 border-b border-outline-variant md:border-b-0 pr-stack-sm">
+                    <span class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Employment Type</span>
+                    <span class="font-body-md text-body-md text-on-surface">{{ data.income_type }}</span>
+                </div>
+                <!-- Data Point -->
+                <div class="flex flex-col py-2 border-b border-outline-variant md:border-b-0 md:border-r md:border-t pr-stack-sm md:pt-stack-sm">
+                    <span class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Age</span>
+                    <span class="font-mono-data text-mono-data text-on-surface">{{ data.age }}</span>
+                </div>
+                <!-- Data Point -->
+                <div class="flex flex-col py-2 md:border-t pr-stack-sm md:pt-stack-sm">
+                    <span class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Family Size</span>
+                    <span class="font-mono-data text-mono-data text-on-surface">{{ data.family_size }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="flex flex-col sm:flex-row gap-stack-md items-center mt-stack-lg pt-stack-md border-t border-outline-variant">
+            <a href="/apply" class="w-full sm:w-auto h-[40px] px-stack-md bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md uppercase tracking-wider rounded hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">refresh</span>
+                Start a New Application
+            </a>
+            {% if prediction != 0 %}
+            <a class="font-body-sm text-body-sm text-primary hover:underline flex items-center gap-1 w-full sm:w-auto justify-center sm:justify-start" href="#">
+                <span class="material-symbols-outlined text-[16px]">help</span>
+                What factors affect this?
+            </a>
+            {% endif %}
+        </div>
+
+    </div>
+</main>
+{% endblock %}

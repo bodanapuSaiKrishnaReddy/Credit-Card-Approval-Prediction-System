@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}CreditPrecision - Review Application{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-4xl mx-auto px-container-padding-desktop py-stack-lg md:py-12 flex flex-col gap-stack-lg">
+    {% if error %}
+    <div class="w-full bg-surface-container-lowest border border-error rounded-lg p-stack-md flex flex-col md:flex-row items-center justify-between gap-stack-md shadow-sm mb-6">
+        <div class="flex items-center gap-stack-sm">
+            <span class="material-symbols-outlined text-error">report</span>
+            <p class="font-body-md text-body-md text-on-surface-variant m-0">
+                {{ error }}
+            </p>
+        </div>
+        <button type="button" onclick="document.getElementById('submit-btn').click();" class="font-label-md text-label-md text-primary border border-primary px-4 py-2 rounded hover:bg-surface-variant transition-colors whitespace-nowrap">
+            Try Again
+        </button>
+    </div>
+    {% endif %}
+    <div class="text-center mb-stack-md">
+        <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-unit">Review Your Application</h1>
+        <p class="font-body-md text-body-md text-on-surface-variant">Please verify all information provided before final submission for risk assessment.</p>
+    </div>
+
+    <!-- Personal Information Section -->
+    <section class="bg-surface-container-lowest border border-surface-dim rounded-lg p-stack-lg shadow-sm">
+        <div class="flex justify-between items-center mb-stack-md border-b border-surface-variant pb-stack-sm">
+            <h2 class="font-headline-md text-headline-md text-primary">Personal Information</h2>
+            <a href="/apply" class="font-label-md text-label-md text-primary hover:underline flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">edit</span> Edit
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Full Name</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.full_name }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Age</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.age }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Gender</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">
+                    {% if data.gender == 'F' %}Female{% else %}Male{% endif %}
+                </span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Family Status</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.family_status }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Children</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.children }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Family Size</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.family_size }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Phone</span>
+                <span class="font-mono-data text-mono-data text-on-surface">{{ data.phone }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Email</span>
+                <span class="font-mono-data text-mono-data text-on-surface">{{ data.email }}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Information Section -->
+    <section class="bg-surface-container-lowest border border-surface-dim rounded-lg p-stack-lg shadow-sm">
+        <div class="flex justify-between items-center mb-stack-md border-b border-surface-variant pb-stack-sm">
+            <h2 class="font-headline-md text-headline-md text-primary">Financial Information</h2>
+            <a href="/apply" class="font-label-md text-label-md text-primary hover:underline flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">edit</span> Edit
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Annual Income</span>
+                <span class="font-mono-data text-mono-data text-on-surface font-semibold">₹{{ "{:,.2f}".format(data.income) }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Car Ownership</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">
+                    {% if data.car == 'Y' %}Yes{% else %}No{% endif %}
+                </span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Realty Ownership</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">
+                    {% if data.realty == 'Y' %}Yes{% else %}No{% endif %}
+                </span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Housing Type</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.housing_type }}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Employment Information Section -->
+    <section class="bg-surface-container-lowest border border-surface-dim rounded-lg p-stack-lg shadow-sm">
+        <div class="flex justify-between items-center mb-stack-md border-b border-surface-variant pb-stack-sm">
+            <h2 class="font-headline-md text-headline-md text-primary">Employment Information</h2>
+            <a href="/apply" class="font-label-md text-label-md text-primary hover:underline flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">edit</span> Edit
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Income Type</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.income_type }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Occupation</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.occupation }}</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Work Experience</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.experience }} Years</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-on-surface-variant">Education</span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">{{ data.education }}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmation & Action Form -->
+    <form id="review-form" action="/predict" method="POST">
+        <!-- Hidden inputs to carry parameters to the evaluation endpoint -->
+        <input type="hidden" name="full-name" value="{{ data.full_name }}">
+        <input type="hidden" name="age" value="{{ data.age }}">
+        <input type="hidden" name="gender" value="{{ data.gender }}">
+        <input type="hidden" name="family-status" value="{{ data.family_status }}">
+        <input type="hidden" name="children" value="{{ data.children }}">
+        <input type="hidden" name="family-size" value="{{ data.family_size }}">
+        <input type="hidden" name="phone" value="{{ data.phone }}">
+        <input type="hidden" name="email" value="{{ data.email }}">
+        <input type="hidden" name="income" value="{{ data.income }}">
+        <input type="hidden" name="car" value="{{ data.car }}">
+        <input type="hidden" name="realty" value="{{ data.realty }}">
+        <input type="hidden" name="housing-type" value="{{ data.housing_type }}">
+        <input type="hidden" name="income-type" value="{{ data.income_type }}">
+        <input type="hidden" name="occupation" value="{{ data.occupation }}">
+        <input type="hidden" name="work-exp" value="{{ data.experience }}">
+        <input type="hidden" name="education" value="{{ data.education }}">
+
+        <section class="flex flex-col items-center mt-stack-md border-t border-surface-dim pt-stack-lg">
+            <div class="hidden w-full max-w-md bg-error-container text-on-error-container border border-error rounded p-stack-sm mb-stack-md font-body-sm text-body-sm flex items-center gap-2" id="error-message">
+                <span class="material-symbols-outlined text-error">error</span>
+                <span>An error occurred during evaluation. Please try again.</span>
+            </div>
+            <label class="flex items-center gap-stack-sm cursor-pointer mb-stack-lg">
+                <input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" id="confirm-checkbox" type="checkbox"/>
+                <span class="font-body-md text-body-md text-on-surface">I confirm this information is accurate and ready for assessment.</span>
+            </label>
+            <button type="button" class="bg-primary-container text-on-primary font-headline-sm text-headline-sm py-2 px-8 rounded-lg h-10 w-full max-w-sm flex justify-center items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary" disabled="" id="submit-btn">
+                <span id="btn-text">Get My Result</span>
+                <span class="material-symbols-outlined hidden animate-spin" id="btn-spinner">progress_activity</span>
+            </button>
+        </section>
+    </form>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkbox = document.getElementById('confirm-checkbox');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnSpinner = document.getElementById('btn-spinner');
+        const errorMsg = document.getElementById('error-message');
+        const form = document.getElementById('review-form');
+
+        checkbox.addEventListener('change', (e) => {
+            submitBtn.disabled = !e.target.checked;
+        });
+
+        submitBtn.addEventListener('click', () => {
+            // Reset error state
+            errorMsg.classList.add('hidden');
+            
+            // Loading state
+            submitBtn.disabled = true;
+            btnText.textContent = 'Evaluating...';
+            btnSpinner.classList.remove('hidden');
+
+            // Wait 800ms for premium loading feeling, then submit form
+            setTimeout(() => {
+                form.submit();
+            }, 800);
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}About - CreditPrecision{% endblock %}
+
+{% block content %}
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-3xl mx-auto px-container-padding-mobile md:px-container-padding-desktop py-12 md:py-16">
+    <article class="bg-surface-container-lowest border border-outline-variant rounded p-8 md:p-12 shadow-sm my-8">
+        <header class="mb-10 pb-6 border-b border-outline-variant">
+            <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-4">About CreditPrecision</h1>
+            <p class="font-body-lg text-body-lg text-secondary">
+                Understanding the methodology and privacy principles behind our institutional approval estimator.
+            </p>
+        </header>
+        
+        <section class="mb-10">
+            <h2 class="font-headline-md text-headline-md text-on-surface mb-4">Data We Analyze</h2>
+            <div class="font-body-md text-body-md text-on-surface-variant space-y-4 leading-relaxed">
+                <p>
+                    To provide an accurate estimation of a user's financial profile, CreditPrecision requires specific data inputs. We strictly look at standardized demographic and financial indicators to construct a comprehensive overview of financial stability.
+                </p>
+                <p>
+                    The core metrics evaluated include current income levels, employment history and stability, detailed household structures, and broader demographic factors. These structured data points allow our algorithms to assess baseline financial capacity without requiring a hard inquiry on formal credit reports.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="font-headline-md text-headline-md text-on-surface mb-4">How Estimates are Generated</h2>
+            <div class="font-body-md text-body-md text-on-surface-variant space-y-4 leading-relaxed">
+                <p>
+                    The underlying logic of CreditPrecision is based on comparative historical analysis. We compare your submitted information against established patterns learned from millions of past, anonymized credit applications.
+                </p>
+                <p>
+                    By identifying statistical correlations between these inputs and historical approval rates, the system calculates a likelihood estimate. This represents the statistical probability of approval based on matching profiles, rather than a definitive underwriting decision.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-10 bg-surface-container p-6 rounded border-l-4 border-primary">
+            <h2 class="font-headline-md text-headline-md text-primary mb-3">Educational Purpose Notice</h2>
+            <div class="font-body-md text-body-md text-on-surface-variant space-y-3 leading-relaxed">
+                <p>
+                    CreditPrecision is designed strictly as a demonstration and educational tool. The estimates provided do not constitute a real credit decision, an offer of credit, or formal financial advice.
+                </p>
+                <p>
+                    <strong>Important:</strong> Using this tool will not affect your actual credit score or impact any formal credit applications with lending institutions.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="font-headline-md text-headline-md text-on-surface mb-4">Data Privacy Policy</h2>
+            <div class="font-body-md text-body-md text-on-surface-variant space-y-4 leading-relaxed">
+                <p>
+                    We adhere to strict data minimization principles. The information submitted through the CreditPrecision interface is processed transiently in memory solely for the purpose of generating the immediate approval estimate.
+                </p>
+                <p>
+                    No user data is stored persistently in our databases, nor is it shared, sold, or transmitted to any third-party marketing or data brokerage entities. Once the session is concluded, all provided metrics are permanently purged from our active processing environment.
+                </p>
+            </div>
+        </section>
+    </article>
+</main>
+{% endblock %}
