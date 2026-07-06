@@ -3,6 +3,7 @@
 {% block title %}CreditPrecision - Analytics Reports{% endblock %}
 
 {% block content %}
+
 <!-- Main Content Canvas -->
 <main class="flex-grow w-full max-w-[1440px] mx-auto px-container-padding-mobile md:px-container-padding-desktop py-stack-lg md:py-12 flex flex-col gap-stack-lg">
     <!-- Header -->
@@ -57,46 +58,56 @@
         <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-stack-lg shadow-sm">
             <h2 class="font-headline-sm text-headline-sm text-primary mb-stack-md border-b border-surface-variant pb-2">Approval Rate by Annual Income Tier</h2>
             <div class="space-y-stack-md pt-2">
+
+                <!-- Hidden element carries server-side values as data attributes (plain strings, never linted) -->
+                <span id="chart-data"
+                      data-under50="{{ rates.under_50 }}"
+                      data-r50100="{{ rates['50_100'] }}"
+                      data-r100150="{{ rates['100_150'] }}"
+                      data-over150="{{ rates.over_150 }}"
+                      hidden></span>
+
                 <!-- Bar Item -->
                 <div>
                     <div class="flex justify-between font-label-md text-label-md text-on-surface mb-1">
-                        <span>Under ₹50k</span>
+                        <span>Under &#8377;50k</span>
                         <span>{{ "%.1f"|format(rates.under_50) }}% approved</span>
                     </div>
                     <div class="w-full bg-surface-variant h-4 rounded overflow-hidden">
-                        <div class="bg-secondary h-full rounded transition-all" style="width: {{ rates.under_50 }}%;"></div>
+                        <div id="bar-under-50" class="bg-secondary h-full rounded transition-all"></div>
                     </div>
                 </div>
                 <!-- Bar Item -->
                 <div>
                     <div class="flex justify-between font-label-md text-label-md text-on-surface mb-1">
-                        <span>₹50k - ₹100k</span>
-                        <span>{{ "%.1f"|format(rates["50_100"]) }}% approved</span>
+                        <span>&#8377;50k - &#8377;100k</span>
+                        <span>{{ "%.1f"|format(rates['50_100']) }}% approved</span>
                     </div>
                     <div class="w-full bg-surface-variant h-4 rounded overflow-hidden">
-                        <div class="bg-primary-container h-full rounded transition-all" style="width: {{ rates["50_100"] }}%;"></div>
+                        <div id="bar-50-100" class="bg-primary-container h-full rounded transition-all"></div>
                     </div>
                 </div>
                 <!-- Bar Item -->
                 <div>
                     <div class="flex justify-between font-label-md text-label-md text-on-surface mb-1">
-                        <span>₹100k - ₹150k</span>
-                        <span>{{ "%.1f"|format(rates["100_150"]) }}% approved</span>
+                        <span>&#8377;100k - &#8377;150k</span>
+                        <span>{{ "%.1f"|format(rates['100_150']) }}% approved</span>
                     </div>
                     <div class="w-full bg-surface-variant h-4 rounded overflow-hidden">
-                        <div class="bg-primary-container h-full rounded transition-all" style="width: {{ rates["100_150"] }}%;"></div>
+                        <div id="bar-100-150" class="bg-primary-container h-full rounded transition-all"></div>
                     </div>
                 </div>
                 <!-- Bar Item -->
                 <div>
                     <div class="flex justify-between font-label-md text-label-md text-on-surface mb-1">
-                        <span>Over ₹150k</span>
+                        <span>Over &#8377;150k</span>
                         <span>{{ "%.1f"|format(rates.over_150) }}% approved</span>
                     </div>
                     <div class="w-full bg-surface-variant h-4 rounded overflow-hidden">
-                        <div class="bg-primary h-full rounded transition-all" style="width: {{ rates.over_150 }}%;"></div>
+                        <div id="bar-over-150" class="bg-primary h-full rounded transition-all"></div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -132,4 +143,21 @@
         </div>
     </div>
 </main>
+
+<script>
+    (function () {
+        var d = document.getElementById('chart-data').dataset;
+        var bars = [
+            { id: 'bar-under-50', w: parseFloat(d.under50) },
+            { id: 'bar-50-100',   w: parseFloat(d.r50100)  },
+            { id: 'bar-100-150',  w: parseFloat(d.r100150) },
+            { id: 'bar-over-150', w: parseFloat(d.over150) }
+        ];
+        bars.forEach(function (b) {
+            var el = document.getElementById(b.id);
+            if (el) { el.style.width = b.w.toFixed(2) + '%'; }
+        });
+    })();
+</script>
+
 {% endblock %}

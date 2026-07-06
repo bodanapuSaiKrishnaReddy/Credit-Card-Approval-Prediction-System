@@ -30,5 +30,45 @@
         "income_type": "Working",
         "decision": "Approved",
         "date": "July 06, 2026"
+    },
+    {
+        "full_name": "John Doe",
+        "income": 50000.0,
+        "age": 30,
+        "income_type": "Working",
+        "decision": "Approved",
+        "date": "July 06, 2026"
+    },
+    {
+        "full_name": "John Doe",
+        "income": 50000.0,
+        "age": 30,
+        "income_type": "Working",
+        "decision": "Approved",
+        "date": "July 06, 2026"
+    },
+    {
+        "full_name": "John Doe",
+        "income": 50000.0,
+        "age": 30,
+        "income_type": "Working",
+        "decision": "Approved",
+        "date": "July 06, 2026"
+    },
+    {
+        "full_name": "John Doe",
+        "income": 50000.0,
+        "age": 30,
+        "income_type": "Working",
+        "decision": "Approved",
+        "date": "July 06, 2026"
+    },
+    {
+        "full_name": "John Doe",
+        "income": 50000.0,
+        "age": 30,
+        "income_type": "Working",
+        "decision": "Approved",
+        "date": "July 06, 2026"
     }
 ]
